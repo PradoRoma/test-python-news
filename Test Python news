@@ -1,1 +1,30 @@
+import requests
+from bs4 import BeautifulSoup
 
+
+class PythonNews:
+
+    def __init__(self):
+        self.url = 'https://habr.com/ru/hub/python/'
+        self.html = self.get_html()
+
+    def get_html(self):
+        try:
+            result = requests.get(self.url)
+            result.raise_for_status()
+            return result.text
+        except(requests.RequestException, ValueError):
+            print('Server error')
+            return False
+
+    def get_news(self):
+        soup = BeautifulSoup(self.html, 'html.parser')
+        news_list = soup.findAll('h2', class_='post__title')
+        #news_list = soup.findAll('div', class_ ="post__text post__text-html post__text_v1")
+        return news_list
+
+
+
+news = PythonNews()
+#print(news.get_html())
+print(news.get_news())
