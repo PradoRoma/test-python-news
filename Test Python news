@@ -1,3 +1,5 @@
+"""Не забудьте перед этим инсталировать в консоль pip install beautifulsoup4 и pip install requests """
+
 import requests
 from bs4 import BeautifulSoup
 
